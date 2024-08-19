@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
 import '../providers/user_provider.dart';
@@ -52,25 +53,7 @@ class RegisterScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    final user = User(
-                      fName: _fNameController.text,
-                      lName: _lNameController.text,
-                      dob: DateTime.parse(_dobController.text),
-                      username: _usernameController.text,
-                      password: _passwordController.text,
-                    );
-
-                    Provider.of<UserProvider>(context, listen: false).addUser(user).then((_) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('User registered successfully!')));
-                    }).catchError((error) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Failed to register user')));
-                    });
-                  }
-                },
+                onPressed: () => _submitForm(context),
                 child: const Text('Register'),
               ),
             ],
@@ -88,7 +71,6 @@ class RegisterScreen extends StatelessWidget {
   }
 
   void _submitForm(BuildContext context) {
-
     if (_formKey.currentState!.validate()) {
       final user = User(
         fName: _fNameController.text,
@@ -101,6 +83,7 @@ class RegisterScreen extends StatelessWidget {
       Provider.of<UserProvider>(context, listen: false).addUser(user).then((_) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('User registered successfully!')));
+        context.go("/");
       }).catchError((error) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Failed to register user')));

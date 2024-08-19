@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
 
             ElevatedButton(onPressed: () => context.go('/register'), child: const Text("Register")),
             const SizedBox(height: 20.0),
-            ElevatedButton(onPressed: (){}, child: const Text("Some BTN")),
+            ElevatedButton(onPressed: ()=> context.go('/users'), child: const Text("All Users")),
 
           ],
         ),
