@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_refer/models/user.dart';
 import 'package:flutter_refer/repositories/user_repository.dart';
+import 'package:go_router/go_router.dart';
 
 class UserListScreen extends StatelessWidget {
   final UserRepository _userRepository = UserRepository();
@@ -34,7 +35,7 @@ class UserListScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () => context.go('/update', extra: user.id),
                             icon: const Icon(Icons.settings),
                           ),
                           IconButton(
